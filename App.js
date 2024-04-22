@@ -29,9 +29,18 @@ export default function App() {
             ),
           }}
         />
-        
-      <StatusBar style="auto" />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            tabBarLabel: 'Settings',
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="cog" size={size} color={color} />
+            ),
+          }}
+        />
       </Tab.Navigator>
+      <StatusBar style="auto" />
     </NavigationContainer>
   );
 }
