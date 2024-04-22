@@ -6,9 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import SettingsScreen from './components/Setting';
 
-const Tab = createBottomTabNavigator();
+
 import HomeScreen from "./components/Home";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 
 const Tab = createBottomTabNavigator();
