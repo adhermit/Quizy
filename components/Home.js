@@ -3,7 +3,7 @@ import { StyleSheet, View, Image } from "react-native";
 
 export default function HomeScreen ({navigation}) {
 return (
-    <View style={{ flex:1,alignItems:"center",justifyContent:"center"}}>
+    <View style={{ flex:1,alignItems:"center",justifyContent:"center", backgroundColor:"pink"}}>
         <Image source = {require("./../assets/Image/logo-quizy.png")} style = {styles.homeImage}/>
     </View>
 );
