@@ -44,7 +44,7 @@ export default function App() {
             options={{
               tabBarLabel: 'Scoreboard',
               tabBarIcon: ({ color, size }) => (
-                <Icon name="score" size={size} color={color} />
+                <Icon name="trofy" size={size} color={color} />
               ),
             }}
           />
