@@ -3,19 +3,22 @@ import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {PaperProvider} from 'react-native-paper';
 import SettingsScreen from './components/Setting';
 import HomeScreen from "./components/Home";
 import CategoryScreen from "./components/Categories";
 import ScoreScreen from './components/ScoreBoard';
 
 
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  
+ 
+   
   
   return (
+    <PaperProvider>
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
@@ -44,7 +47,7 @@ export default function App() {
             options={{
               tabBarLabel: 'Scoreboard',
               tabBarIcon: ({ color, size }) => (
-                <Icon name="trofy" size={size} color={color} />
+                <Icon name="trophy" size={size} color={color} />
               ),
             }}
           />
@@ -61,6 +64,7 @@ export default function App() {
       </Tab.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
+    </PaperProvider>
   );
 }
 
