@@ -7,7 +7,6 @@ export default function CategoryScreen() {
   return (
     <ScrollView>
         <View style={styles.container}>
-        <Text>Categories</Text>
         <List.Section>
             {categoriesData.map((category, index) => (
             <List.Item title={category.name} left={(props) => <List.Icon {...props} icon={category.icon} />} />
