@@ -9,7 +9,7 @@ export default function CategoryScreen() {
         <View style={styles.container}>
             <List.Section>
                 {categoriesData.map((category, index) => (
-            <Card style={{margin: 5, backgroundColor: '#fff'}} >
+            <Card Key={categoriesData.id} style={{margin: 5, backgroundColor: '#fff'}} >
                 <List.Item title={category.name} left={(props) => <List.Icon {...props} icon={category.icon} />} />
             </Card>
                 ))}
