@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
 import { categoriesData } from "../Data/Category";
-import { List } from "react-native-paper";
+import { List, Card } from "react-native-paper";
 
 export default function CategoryScreen() {
   return (
     <ScrollView>
         <View style={styles.container}>
-        <List.Section>
-            {categoriesData.map((category) => (
-            <List.Item title={category.name} key= {category.key} left={(props) => <List.Icon {...props} icon={category.icon} />} />
-            ))}
-        </List.Section>
+            <List.Section>
+                {categoriesData.map((category, index) => (
+            <Card style={{margin: 5, backgroundColor: '#fff'}} >
+                <List.Item title={category.name} left={(props) => <List.Icon {...props} icon={category.icon} />} />
+            </Card>
+                ))}
+            </List.Section>
         </View>
     </ScrollView>
   );
