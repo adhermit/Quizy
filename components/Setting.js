@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View,Text, TextInput, Button, StyleSheet } from 'react-native';
 
 export default function SettingScreen() {
     const [formData, setFormData] = useState({ name: '', numQuestions: '' });
@@ -15,12 +15,14 @@ export default function SettingScreen() {
 
     return (
         <View style={styles.container}>
+            <Text style={{margin: 5}}>Enter Your Username: </Text>
             <TextInput
                 style={styles.input}
                 onChangeText={(text) => handleChange('name', text)}
                 value={formData.name}
                 placeholder="Username"
             />
+            <Text style={{margin: 5}}>Enter Number Of Quizzes: </Text>
             <TextInput
                 style={styles.input}
                 onChangeText={(text) => handleChange('numQuestions', text)}
