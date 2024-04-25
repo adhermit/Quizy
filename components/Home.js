@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, Alert } from "react-native";
+import { StyleSheet, View,Text, Image,  } from "react-native";
 import { Button } from "react-native-paper";
 
 export default function HomeScreen ({navigation}) {
@@ -9,6 +9,7 @@ return (
     Press me
         
   </Button>
+  <Text>home page</Text>
     </View>
 );
 }
