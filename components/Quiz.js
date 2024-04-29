@@ -3,11 +3,13 @@ import {View, Text,  StyleSheet} from 'react-native';
 
 
 
-export default function quizScreen() {
+export default function QuizScreen() {
   return (
+   
     <View style={style.container}>
       <Text>Details Screen</Text>
     </View>
+    
   );
 }
 
