@@ -6,7 +6,7 @@ export default function QuizScreen() {
   return (
    
     <View style={style.container}>
-      <Button title="Go Back" onPress={goBack} />
+      <Text>Details Screen</Text>
     </View>
     
   );
