@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { View,Text, TextInput, Button, StyleSheet } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function SettingScreen() {
+    const navigation = useNavigation();
+
     const [formData, setFormData] = useState({ name: '', numQuestions: '' });
+    
+    const handleSubmit = () => {
+        console.log("Player Name:", formData.name);
+        navigation.navigate('ScoreScreen', {formData: formData.name});
+    };
 
     const handleChange = (name, value) => {
         setFormData(prevState => ({ ...prevState, [name]: value }));
-    };
-
-    const handleSubmit = () => {
-        alert('Name: ' + formData.name);
-        alert('Number of Quizzes: ' + formData.numQuestions);
     };
 
     return (

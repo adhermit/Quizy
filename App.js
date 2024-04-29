@@ -20,21 +20,16 @@ export default function App() {
   
   return (
     <PaperProvider>
-    <NavigationContainer>
-    <Stack.Navigator>
-    <Stack.Screen component ={TabsNavigator} name="Tabs" options= {{headerShown:false}}/>
-  <Stack.Screen component ={QuizScreen} name="Quiz"/>
-  <Stack.Screen component ={HomeScreen} name="Home"/>
-
-  
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen component ={TabsNavigator} name="Tabs" options= {{headerShown:false}}/>
+          <Stack.Screen component ={QuizScreen} name="Quiz"/>
+          <Stack.Screen component ={HomeScreen} name="Home"/>
+        </Stack.Navigator>
     
-   </Stack.Navigator>
-  
+        <StatusBar style="auto" />
         
-      <StatusBar style="auto" />
-      
-     
-    </NavigationContainer>
+      </NavigationContainer>
     </PaperProvider>
   );
 }
