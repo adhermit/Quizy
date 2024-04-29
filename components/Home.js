@@ -20,11 +20,10 @@ return (
     
 );
 }
-
 const styles = StyleSheet.create({
-  homeImage: {
-    height: 200,
-    resizeMode: 'contain',
-    marginBottom: 20,
-  },
+    homeImage: {
+        "height": 200,
+        resizeMode: 'contain',
+        marginBottom: 20,
+    },
 });
