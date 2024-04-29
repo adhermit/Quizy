@@ -1,22 +1,19 @@
-
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {PaperProvider} from 'react-native-paper';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import SettingsScreen from './components/Setting';
 import HomeScreen from "./components/Home";
 import CategoryScreen from "./components/Categories";
 import ScoreScreen from './components/ScoreBoard';
+import quizScreen from './components/Quiz';
 
-
-
-
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-
 
 export default function App() {
  
@@ -26,6 +23,11 @@ export default function App() {
     <PaperProvider>
     <NavigationContainer>
     
+    <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Quiz" component={quizScreen} />
+      </Stack.Navigator>
+
       <Tab.Navigator>
         <Tab.Screen
           name="Home"

@@ -1,12 +1,14 @@
 import React from 'react';
-import {View, Text,  StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 
+export default function quizScreen({navigation}) {
+  const goBack = () => {
+    navigation.goBack();
+  };
 
-
-export default function quizScreen() {
   return (
     <View style={style.container}>
-      <Text>Details Screen</Text>
+      <Button title="Go Back" onPress={goBack} />
     </View>
   );
 }
