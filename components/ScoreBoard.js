@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 
 export default function ScoreScreen() {
-    const { formData } = formData.name;
 
     const [scores, setScores] = useState([]);
 
@@ -26,9 +25,11 @@ export default function ScoreScreen() {
         </View>
     );
 
+    const title = 'Quiz Scores';
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Scores for {playerName}</Text>
+            <Text style={styles.title}>{title}</Text>
             <FlatList
                 data={scores}
                 renderItem={renderItem}
@@ -59,4 +60,3 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 });
- 

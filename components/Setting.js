@@ -1,39 +1,39 @@
 import React, { useState } from 'react';
-import { View,Text, TextInput, Button, StyleSheet } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function SettingScreen() {
+export default function SettingScreen({ onStart }) {
+    const [username, setUsername] = useState('Noobe');
+    const [numberQuestions, setNumQuestions] = useState('');
     const navigation = useNavigation();
 
-    const [formData, setFormData] = useState({ name: '', numQuestions: '' });
-    
     const handleSubmit = () => {
-        console.log("Player Name:", formData.name);
-        navigation.navigate('ScoreScreen', {formData: formData.name});
-    };
-
-    const handleChange = (name, value) => {
-        setFormData(prevState => ({ ...prevState, [name]: value }));
+        if (numberQuestions.trim() && !isNaN(numberQuestions)) {
+            onStart(username, parseInt(numberQuestions));
+            navigation.navigate('Quiz');
+        } else {
+            alert('Please enter a valid number of questions.');
+        }
     };
 
     return (
         <View style={styles.container}>
-            <Text style={{margin: 5}}>Enter Your Username: </Text>
+            <Text style={{ margin: 5 }}>Enter Your Username: </Text>
             <TextInput
                 style={styles.input}
-                onChangeText={(text) => handleChange('name', text)}
-                value={formData.name}
+                onChangeText={(text) => setUsername(text)}
                 placeholder="Username"
+                value={username}
             />
-            <Text style={{margin: 5}}>Enter Number Of Quizzes: </Text>
+            <Text style={{ margin: 5 }}>Enter Number Of Quizzes: </Text>
             <TextInput
                 style={styles.input}
-                onChangeText={(text) => handleChange('numQuestions', text)}
-                value={formData.numQuestions}
+                onChangeText={(text) => setNumQuestions(text)}
                 placeholder="Number of Quizzes"
                 keyboardType="numeric"
+                value={numberQuestions}
             />
-            <Button title="Submit" onPress={handleSubmit} />
+            <Button title="Conform" onPress={handleSubmit} />
         </View>
     );
 }
