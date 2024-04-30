@@ -1,68 +1,34 @@
-import * as React from 'react';
-import {  RadioButton, Card, Text, Title , Button} from 'react-native-paper';
-import { useState, useEffect } from "react";
-import {decode as atob, encode as btoa} from 'base-64';
+import React, { useState } from 'react';
+import { RadioButton, Card, Title, Button, Text } from 'react-native-paper';
+import { decode as base64Decode } from 'base-64';
 
-const ListCard= ({quiz, onNext, onAnswer}) => {
-
-  const [selectedAnswer, setSelectedAnswer] = React.useState(null);
-  const [shuffledAnswers, setShuffledAnswers] = React.useState([]);
+const ListCard = ({ quiz, onNext, onAnswer }) => {
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [correctAnswer, setCorrectAnswer] = useState('');
-  const [Score, setScore] = useState(0);
-  const [answeredQuestions, setAnsweredQuestions] = useState(0);
-
-  const shuffleAnswers = (answers) => {
-    const shuffled = [...answers];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
-
-  useEffect(() => {
-    if (quiz) {
-      const answers = [...quiz.incorrect_answers, quiz.correct_answer];
-      const shuffled = shuffleAnswers(answers);
-      setShuffledAnswers(shuffled);
-    }
-  }, [quiz]);
 
   const checkAnswer = (answer) => {
     setShowResult(true);
-    const isCorrect = answer === quiz.correct_answer;
-    onAnswer(isCorrect);
-    if (isCorrect){
-      setScore(Score +1);
-    }
-    setAnsweredQuestions(answeredQuestions + 1);
+    onAnswer(answer === base64Decode(quiz.correct_answer)); // Pass true/false to parent
   };
 
   const handleNext = () => {
     setShowResult(false);
     setSelectedAnswer(null);
-    setCorrectAnswer('');
     onNext();
-    if (answeredQuestions === quiz.length - 1){
-      onQuizFinish(Score);
-    }
   };
 
   return (
     <Card>
       <Card.Content>
-        <Title> {atob(quiz.question)}</Title>
+        <Title>{base64Decode(quiz.question)}</Title>
       </Card.Content>
-      {shuffledAnswers.map((answer, index) => (
+      {quiz.answers.map((answer, index) => (
         <RadioButton.Item
           key={index}
-          label={atob(answer)}
-          value={atob(answer)}
+          label={base64Decode(answer)}
+          value={base64Decode(answer)}
           status={selectedAnswer === answer ? 'checked' : 'unchecked'}
-
-     onPress={() => {
+          onPress={() => {
             setSelectedAnswer(answer);
             checkAnswer(answer);
           }}
@@ -70,9 +36,9 @@ const ListCard= ({quiz, onNext, onAnswer}) => {
         />
       ))}
       {showResult && (
-     <Text style={{ color: isCorrect ? 'green' : 'red' }}>
-     {isCorrect ? 'Correct Answer!' : `Wrong Answer! The correct answer is: ${atob(correctAnswer)}`}
-   </Text>
+        <Text style={{ color: quiz.correct_answer === selectedAnswer ? 'green' : 'red' }}>
+          {quiz.correct_answer === selectedAnswer ? 'Correct Answer!' : `Wrong Answer! The correct answer is: ${base64Decode(quiz.correct_answer)}`}
+        </Text>
       )}
       {showResult && (
         <Button onPress={handleNext} mode="contained" style={{ margin: 10 }}>
@@ -81,7 +47,6 @@ const ListCard= ({quiz, onNext, onAnswer}) => {
       )}
     </Card>
   );
-
 };
 
 export default ListCard;
