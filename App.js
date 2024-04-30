@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,6 +16,15 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [username, setUsername] = useState('');
+  const [numQuestions, setNumQuestions] = useState(0);
+
+  const handleStartQuiz = (name, num) => {
+    setUsername(name);
+    setNumQuestions(num);
+    navigation.navigate('Quiz', {username: name, nukmQuestions: num});
+  };
+
   return (
     <PaperProvider>
       <NavigationContainer>
@@ -25,6 +34,9 @@ export default function App() {
             component={TabsNavigator}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="Settings">
+            {(props) => <SettingScreen {...props} onStart={handleStartQuiz} />}
+          </Stack.Screen>
           <Stack.Screen name="Quiz" component={QuizScreen} />
         </Stack.Navigator>
         <StatusBar style="auto" />

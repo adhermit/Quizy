@@ -28,46 +28,23 @@ const QuizScreen = () => {
   };
 
   const handleNext = () => {
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-  };
-
-  const handleAnswer = (isCorrect) => {
-    if (isCorrect) {
+    const currentQuestion = quiz[currentQuestionIndex];
+    const isCorrect = selectedAnswer === currentQuestion.correct_answer;
+    if (isCorrect){
       setScore(score + 1);
     }
-    if (currentQuestionIndex === quiz.length - 1) {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    if (currentQuestionIndex === quiz.length - 1){
       setQuizFinished(true);
     }
   };
 
-  const handleQuizFinish = () => {
-    console.log('Total Score:', score);
+  const handleNextQuestion = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setSelectedOption(null);
+    setShowCorrectAnswer(false);
+    setIsWrongAnswer(false);
   };
-
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="blue" />
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View style={styles.container}>
-        <Text>Error: {error}</Text>
-      </View>
-    );
-  }
-
-  if (quizFinished) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.scoreText}>Your Score: {score}/{quiz.length}</Text>
-        <Button title="Finish" onPress={handleQuizFinish} />
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
