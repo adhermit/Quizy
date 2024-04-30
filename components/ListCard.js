@@ -3,15 +3,15 @@ import {  RadioButton, Card, Text, Title , Button} from 'react-native-paper';
 import { useState, useEffect } from "react";
 import {decode as atob, encode as btoa} from 'base-64';
 
-
-
-const ListCard= ({quiz, onNext}) => {
+const ListCard= ({quiz, onNext, onAnswer}) => {
 
   const [selectedAnswer, setSelectedAnswer] = React.useState(null);
   const [shuffledAnswers, setShuffledAnswers] = React.useState([]);
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState('');
+  const [Score, setScore] = useState(0);
+  const [answeredQuestions, setAnsweredQuestions] = useState(0);
 
   const shuffleAnswers = (answers) => {
     const shuffled = [...answers];
@@ -24,7 +24,6 @@ const ListCard= ({quiz, onNext}) => {
 
   useEffect(() => {
     if (quiz) {
-      // Combine correct and incorrect answers and shuffle them
       const answers = [...quiz.incorrect_answers, quiz.correct_answer];
       const shuffled = shuffleAnswers(answers);
       setShuffledAnswers(shuffled);
@@ -33,12 +32,12 @@ const ListCard= ({quiz, onNext}) => {
 
   const checkAnswer = (answer) => {
     setShowResult(true);
-    if (answer === quiz.correct_answer) {
-      setIsCorrect(true);
-    } else {
-      setIsCorrect(false);
-      setCorrectAnswer(quiz.correct_answer);
+    const isCorrect = answer === quiz.correct_answer;
+    onAnswer(isCorrect);
+    if (isCorrect){
+      setScore(Score +1);
     }
+    setAnsweredQuestions(answeredQuestions + 1);
   };
 
   const handleNext = () => {
@@ -46,6 +45,9 @@ const ListCard= ({quiz, onNext}) => {
     setSelectedAnswer(null);
     setCorrectAnswer('');
     onNext();
+    if (answeredQuestions === quiz.length - 1){
+      onQuizFinish(Score);
+    }
   };
 
   return (
@@ -62,7 +64,7 @@ const ListCard= ({quiz, onNext}) => {
 
      onPress={() => {
             setSelectedAnswer(answer);
-            checkAnswer(answer); // Directly check the answer when the user selects it
+            checkAnswer(answer);
           }}
           disabled={showResult}
         />
