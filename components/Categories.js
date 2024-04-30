@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+
 import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
 import { categoriesData } from "../Data/Category";
 import { List, Card } from "react-native-paper";
