@@ -30,10 +30,10 @@ export default function QuizScreen() {
   const handleNext = () => {
     const currentQuestion = quiz[currentQuestionIndex];
     const isCorrect = selectedAnswer === currentQuestion.correct_answer;
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
     if (isCorrect){
       setScore(score + 1);
     }
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
     if (currentQuestionIndex === quiz.length - 1){
       setQuizFinished(true);
     }
